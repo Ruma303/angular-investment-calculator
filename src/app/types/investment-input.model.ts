@@ -4,3 +4,12 @@ export type InvestmentInput = {
   expectedReturn: number,
   duration: number,
 }
+
+export type InvestmentResponse = {
+  year: number;
+  interest: number;
+  valueEndOfYear: number;
+  annualInvestment: number;
+  totalInterest: number;
+  totalAmountInvested: number;
+}

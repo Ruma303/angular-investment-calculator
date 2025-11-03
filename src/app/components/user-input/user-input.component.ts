@@ -7,7 +7,7 @@ import { InvestmentInput } from '../../types/investment-input.model';
   standalone: true,
   imports: [FormsModule],
   template: `
-    <form (ngSubmit)="onSubmit()">
+    <form>
       <div class="input-group">
         <label for="initial-investment">Initial Investment</label>
         <input type="number" id="initial-investment" name="initial-investment"
@@ -29,8 +29,9 @@ import { InvestmentInput } from '../../types/investment-input.model';
         <input type="number" id="years" name="years"
         [(ngModel)]="enteredDuration">
       </div>
-      <p>
-        <button>Calculate</button>
+      <p class="buttons">
+        <button (click)="onSubmit()">Calculate</button>
+        <button (click)="onReset()">Reset</button>
       </p>
     </form>
   `,
@@ -39,6 +40,7 @@ import { InvestmentInput } from '../../types/investment-input.model';
 export class UserInputComponent {
 
   calculate = output<InvestmentInput>();
+  reset = output<void>();
 
   enteredInitialInvestment = '0';
   enteredAnnualInvestment = '0';
@@ -59,5 +61,9 @@ export class UserInputComponent {
       expectedReturn: +this.enteredExpectedReturn,
       duration: +this.enteredDuration,
     });
+  }
+
+  onReset() {
+    this.reset.emit();
   }
 }

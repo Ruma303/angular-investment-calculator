@@ -1,16 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InvestmentInput } from '../../types/investment-input.model';
+import { InvestmentResponse } from '../../types/investment-input.model';
 
 @Component({
   selector: 'app-investment-result',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <p>
-      Please enter some values and press the "Calculate" button.
-    </p>
-
+    @if (investmentData.length === 0) {
+      <p class="center">Please enter some values and press the "Calculate" button.</p>
+    } @else {
     <table>
       <thead>
         <tr>
@@ -25,23 +24,18 @@ import { InvestmentInput } from '../../types/investment-input.model';
       <tbody>
         <tr *ngFor="let data of investmentData">
           <td>{{ data.year }}</td>
-          <td>{{ data.interest }}</td>
-          <td>{{ data.valueEndOfYear }}</td>
-          <td>{{ data.annualInvestment }}</td>
-          <td>{{ data.totalInterest }}</td>
-          <td>{{ data.totalAmountInvested }}</td>
+          <td>{{ data.interest | currency:'USD':true }}</td>
+          <td>{{ data.valueEndOfYear | currency:'USD':true }}</td>
+          <td>{{ data.annualInvestment | currency:'USD':true }}</td>
+          <td>{{ data.totalInterest | currency:'USD':true }}</td>
+          <td>{{ data.totalAmountInvested | currency:'USD':true }}</td>
         </tr>
       </tbody>
+    </table>
+    }
   `,
   styleUrl: './investment-result.css'
 })
 export class InvestmentResultComponent {
-  @Input() investmentData: Array<{
-    year: number;
-    interest: number;
-    valueEndOfYear: number;
-    annualInvestment: number;
-    totalInterest: number;
-    totalAmountInvested: number;
-  }> = [];
+  @Input() investmentData: Array<InvestmentResponse> = [];
 }

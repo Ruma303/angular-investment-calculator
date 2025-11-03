@@ -1,4 +1,3 @@
-
 form {
   padding: 1rem;
   max-width: 30rem;
@@ -6,6 +5,9 @@ form {
   border-radius: 4px;
   background: linear-gradient(180deg, #307e6c, #2b996d);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
 }
 
 .input-group {
@@ -48,4 +50,10 @@ button {
 
 button:hover {
   background-color: #aaf1d6;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
 }
