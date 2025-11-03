@@ -48,13 +48,14 @@ export class AppComponent {
 
       const totalInterest =
         investmentValue - annualInvestment * year - initialInvestment;
-      annualData.push({
-        year: year,
-        interest: interestEarnedInYear,
-        valueEndOfYear: investmentValue,
-        annualInvestment: annualInvestment,
-        totalInterest: totalInterest,
-        totalAmountInvested: initialInvestment + annualInvestment * year,
+
+        annualData.push({
+          year: year,
+          interest: interestEarnedInYear,
+          valueEndOfYear: investmentValue,
+          annualInvestment: annualInvestment,
+          totalInterest: totalInterest,
+          totalAmountInvested: initialInvestment + annualInvestment * year,
       });
     }
 
