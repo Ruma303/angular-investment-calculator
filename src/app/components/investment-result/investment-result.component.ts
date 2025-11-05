@@ -1,13 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InvestmentService } from '../../services/investment-service.service';
+import { InvestmentResponse } from '../../types/investment-input.model';
 
 @Component({
   selector: 'app-investment-result',
   standalone: true,
   imports: [CommonModule],
   template: `
-    @if (results.length === 0) {
+    @if (!this.results || this.results.length === 0) {
       <p class="center">Please enter some values and press the "Calculate" button.</p>
     } @else {
     <table>
@@ -39,7 +40,7 @@ import { InvestmentService } from '../../services/investment-service.service';
 export class InvestmentResultComponent {
   private investmentData = inject(InvestmentService);
 
-  get results() {
-    return this.investmentData.results;
+  get results(): InvestmentResponse[] | undefined {
+    return this.investmentData.results();
   }
 }
