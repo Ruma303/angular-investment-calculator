@@ -1,13 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InvestmentResponse } from '../../types/investment-input.model';
+import { InvestmentService } from '../../services/investment-service.service';
 
 @Component({
   selector: 'app-investment-result',
   standalone: true,
   imports: [CommonModule],
   template: `
-    @if (investmentData.length === 0) {
+    @if (results.length === 0) {
       <p class="center">Please enter some values and press the "Calculate" button.</p>
     } @else {
     <table>
@@ -22,7 +22,7 @@ import { InvestmentResponse } from '../../types/investment-input.model';
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of investmentData">
+        <tr *ngFor="let data of results">
           <td>{{ data.year }}</td>
           <td>{{ data.interest | currency:'USD':true }}</td>
           <td>{{ data.valueEndOfYear | currency:'USD':true }}</td>
@@ -37,5 +37,9 @@ import { InvestmentResponse } from '../../types/investment-input.model';
   styleUrl: './investment-result.css'
 })
 export class InvestmentResultComponent {
-  @Input() investmentData: Array<InvestmentResponse> = [];
+  private investmentData = inject(InvestmentService);
+
+  get results() {
+    return this.investmentData.results;
+  }
 }
